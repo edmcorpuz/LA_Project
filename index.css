@@ -30,19 +30,19 @@ a:hover {
     color: #050805;
 }
 
-/* New Styles */
 table {
-    margin: 10px auto;
-    border-collapse: collapse;
-    width: auto;
-}
+            border-collapse: collapse;
+            width: 100%;
+        }
 
-td {
-    border: 3px round #ccc;
-    padding: 1px;
-    text-align: center;
-}
+        table, th, td {
+            border: 1px solid black;
+        }
 
+        td {
+            text-align: center;
+            padding: 8px;
+}
 input[type="number"] {
     font-family: 'Bebas Neue', sans-serif;
     width: 60px;
