@@ -79,45 +79,48 @@
         }
 
         function rowEchelon(matrix) {
-            const rows = matrix.length;
-            const cols = matrix[0].length;
+    const rows = matrix.length;
+    const cols = matrix[0].length;
 
-            let lead = 0;
-            for (let r = 0; r < rows; r++) {
-                if (cols <= lead) {
-                    return matrix;
-                }
-                let i = r;
-                while (matrix[i][lead] === 0) {
-                    i++;
-                    if (rows === i) {
-                        i = r;
-                        lead++;
-                        if (cols === lead) {
-                            return matrix;
-                        }
-                    }
-                }
-                const temp = matrix[i];
-                matrix[i] = matrix[r];
-                matrix[r] = temp;
-
-                const val = matrix[r][lead];
-                for (let j = 0; j < cols; j++) {
-                    matrix[r][j] /= val;
-                }
-
-                for (let i = 0; i < rows; i++) {
-                    if (i === r) continue;
-                    const val = matrix[i][lead];
-                    for (let j = 0; j < cols; j++) {
-                        matrix[i][j] -= val * matrix[r][j];
-                    }
-                }
-                lead++;
-            }
+    let lead = 0;
+    for (let r = 0; r < rows; r++) {
+        if (cols <= lead) {
             return matrix;
         }
+        let i = r;
+        while (matrix[i][lead] === 0) {
+            i++;
+            if (rows === i) {
+                i = r;
+                lead++;
+                if (cols === lead) {
+                    return matrix;
+                }
+            }
+        }
+        // Swap rows
+        const temp = matrix[i];
+        matrix[i] = matrix[r];
+        matrix[r] = temp;
+
+        // Normalize the pivot row
+        const val = matrix[r][lead];
+        for (let j = 0; j < cols; j++) {
+            matrix[r][j] /= val;
+        }
+
+        // Eliminate rows below the pivot
+        for (let i = r + 1; i < rows; i++) {
+            const factor = matrix[i][lead];
+            for (let j = 0; j < cols; j++) {
+                matrix[i][j] -= factor * matrix[r][j];
+            }
+        }
+        lead++;
+    }
+    return matrix;
+}
+
 
         function displayResult(matrix) {
             const resultContainer = document.getElementById('resultContainer');
